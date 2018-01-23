@@ -1,0 +1,33 @@
+(use Array)
+
+(deftype Connection
+    [nr Int
+     to (Array Int)
+     visited Bool])
+
+(defn connection-from-string [s]
+  (let [splitted (split-by @s [\<])
+        number (Int.from-string (nth &splitted 0))
+        connection-str (suffix-string (nth &splitted 1) 2)
+        connections (copy-map Int.from-string &(split-by connection-str [\, \space]))]
+    (Connection.init number connections false)))
+
+(def counter 0)
+
+(def connections
+  (let-do [;;input @"0 <-> 2\n1 <-> 1\n2 <-> 0, 3, 4\n3 <-> 2, 4\n4 <-> 2, 3, 6\n5 <-> 6\n6 <-> 4, 5"
+           input (IO.read-file "day12.txt")
+           data (String.lines input)]
+    (copy-map connection-from-string &data)))
+
+(defn count-connected [current]
+  (if (Connection.visited (nth &connections current))
+    counter
+    (do
+      (Connection.set-visited! (nth &connections current) true)
+      (+ 1 (sum &(endo-map count-connected @(Connection.to (nth &connections current))))))))
+
+(defn main []
+  (do
+    (println* &connections)
+    (println* (count-connected 0))))
