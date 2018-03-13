@@ -11,8 +11,8 @@
         (let [jump @(nth &ints pos)]
           (do
             (aset! &ints pos (f jump)) ;; modify instruction
-            (set! &pos (+ pos jump)) ;; jump!
-            (set! &steps (inc steps)))))
+            (set! pos (+ pos jump)) ;; jump!
+            (set! steps (inc steps)))))
       steps)))
 
 (defn part-2 [x]
@@ -22,7 +22,7 @@
 
 (defn main []
   (let [input (read-file "day5.txt")
-        ints (copy-map from-string &(lines input))]
+        ints (copy-map from-string &(String.lines &input))]
     (do
       (println (refstr (answer @&ints inc)))
       (println (refstr (answer @&ints part-2))))))
