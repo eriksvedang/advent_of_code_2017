@@ -7,8 +7,8 @@
     (copy-map from-string &words)))
 
 (defn diff-value [ints]
-  (let [a (max ints)
-        b (min ints)]
+  (let [a (maximum ints)
+        b (minimum ints)]
     (- a b)))
 
 (defn evenly-divide-value [ints]
@@ -21,7 +21,7 @@
                 b @(nth ints j)
                 division (/ a b)]
             (if (and (/= a b) (= 0 (mod a b)))
-              (set! &answer division)
+              (set! answer division)
               ()))))
       answer)))
 

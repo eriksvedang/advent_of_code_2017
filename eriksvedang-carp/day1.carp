@@ -21,7 +21,7 @@
         len (count ints)]
     (do
       (for [i 0 len]
-        (set! &sum (+ sum (match-value ints i step))))
+        (set! sum (+ sum (match-value ints i step))))
       (IO.println (refstr sum)))))
 
 (defn main []
