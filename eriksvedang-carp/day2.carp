@@ -19,9 +19,8 @@
         (for [j 0 n]
           (let [a @(nth ints i)
                 b @(nth ints j)]
-            (when (/= a b)
-              (when (= 0 (mod a b))
-                (set! answer (/ a b)))))))
+            (when (and (/= a b) (= 0 (mod a b)))
+              (set! answer (/ a b))))))
       answer)))
 
 (defn main []
