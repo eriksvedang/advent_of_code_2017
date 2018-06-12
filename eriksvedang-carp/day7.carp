@@ -13,7 +13,7 @@
 
 (defn parse-disc [line]
   (let [words (String.words line)]
-    (if (= 2 (count &words))
+    (if (= 2 (length &words))
       (Disc.init (first &words) [] false)
       (Disc.init (first &words) (endo-map cleanup (suffix-array &words 3)) false))))
 
@@ -26,16 +26,16 @@
 (defn index-of-disc-with-name [discs name]
   (let [result -1]
     (do
-      (for [i 0 (count discs)]
+      (for [i 0 (length discs)]
        (if (= name (Disc.name (nth discs i)))
          (set! result i)
          ()))
       result)))
 
 (defn solve! [discs]
-  (for [i 0 (count discs)]
+  (for [i 0 (length discs)]
     (let [links (Disc.links (nth discs i))]
-      (for [j 0 (count links)]
+      (for [j 0 (length links)]
         (mark discs (index-of-disc-with-name discs (nth links j)))))))
 
 (defn unused? [disc]

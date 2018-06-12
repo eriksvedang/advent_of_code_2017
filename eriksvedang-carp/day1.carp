@@ -2,7 +2,7 @@
 (use Array)
 
 (defn wrapped-nth [xs i]
-  @(nth xs (mod i (count xs))))
+  @(nth xs (mod i (length xs))))
 
 (defn match-value [xs i step]
   (let [a (wrapped-nth xs i)
@@ -18,7 +18,7 @@
 
 (defn solution [ints step]
   (let [sum 0
-        len (count ints)]
+        len (length ints)]
     (do
       (for [i 0 len]
         (set! sum (+ sum (match-value ints i step))))
@@ -29,4 +29,4 @@
         ints (parse &input)]
     (do
       (solution &ints 1)
-      (solution &ints (/ (count &ints) 2)))))
+      (solution &ints (/ (length &ints) 2)))))

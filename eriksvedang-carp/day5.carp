@@ -4,7 +4,7 @@
 
 (defn answer [ints f]
   (let [pos 0
-        len (count &ints)
+        len (length &ints)
         steps 0]
     (do
       (while (and (< -1 pos) (< pos len))
